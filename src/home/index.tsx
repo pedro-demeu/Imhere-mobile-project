@@ -7,6 +7,18 @@ export default function Home() {
     const [participants, setParticipants] = React.useState<string[]>([]);
     const [participantName, setParticipantName] = React.useState('');
 
+    const handleParticipantRemove = (name: string) => {
+        Alert.alert('Remover', `Remover o participante ${name}?`, [
+            {
+                text: 'Sim',
+                onPress: () => setParticipants(prevState => prevState.filter(_participant => _participant !== name))
+            }, {
+                text: 'Não',
+                style: 'cancel'
+            }
+        ])
+    }
+
     const handleParticipantAdd = () => {
         if (participants.includes(participantName)) {
             return Alert.alert('Ops!', "Participante já está na lista! ")
@@ -14,6 +26,8 @@ export default function Home() {
         setParticipants([...participants, participantName]);
         setParticipantName('')
     }
+
+
 
     return (
         <View style={styles.container}>
@@ -37,7 +51,7 @@ export default function Home() {
             <FlatList
                 data={participants}
                 keyExtractor={item => item}
-                renderItem={({ item }) => (<Participant name={item} key={item} />)}
+                renderItem={({ item }) => (<Participant name={item} key={item} onRemove={handleParticipantRemove} />)}
                 ListEmptyComponent={() => <Text style={styles.haveNoParticipantText}>Não há participantes no momento!</Text>}
             >
             </FlatList>
