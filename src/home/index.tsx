@@ -44,7 +44,6 @@ export default function Home() {
                 ListEmptyComponent={() => <Text style={styles.haveNoParticipantText}>Não há participantes no momento!</Text>}
             >
             </FlatList>
-            <StatusBar />
         </View>
     );
 }
