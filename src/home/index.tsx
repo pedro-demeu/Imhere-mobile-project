@@ -1,6 +1,6 @@
 import { Text, View, StatusBar, TextInput, TouchableOpacity } from 'react-native';
 import { styles } from './styles';
-
+import { Participant } from '../components/Participant';
 export default function Home() {
 
     const handleParticipantAdd = () => {
@@ -24,6 +24,10 @@ export default function Home() {
                     <Text style={styles.buttonText}>+</Text>
                 </TouchableOpacity>
             </View>
+
+            <Participant name='Pedro' />
+            <Participant name="Julio Cesar" />
+            <Participant name="Lucas" />
             <StatusBar />
         </View>
     );
