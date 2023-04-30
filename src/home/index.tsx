@@ -1,25 +1,20 @@
-import { Text, View, StatusBar, TextInput, TouchableOpacity, FlatList } from 'react-native';
+import React from 'react'
+import { Text, View, StatusBar, TextInput, TouchableOpacity, FlatList, Alert } from 'react-native';
 import { styles } from './styles';
 import { Participant } from '../components/Participant';
-export default function Home() {
 
-    const participants = [
-        'Lourenço',
-        'Julio Cezar',
-        'Valdemir',
-        "Pedro Miguel",
-        "Wagninho",
-        'Lourenço',
-        'Julio Cezar',
-        'Valdemir',
-        "Pedro Miguel",
-        "Wagninho",
-    ]
+export default function Home() {
+    const [participants, setParticipants] = React.useState<string[]>([]);
+    const [participantName, setParticipantName] = React.useState('');
 
     const handleParticipantAdd = () => {
-        console.log("clicked!");
-
+        if (participants.includes(participantName)) {
+            return Alert.alert('Ops!', "Participante já está na lista! ")
+        }
+        setParticipants([...participants, participantName]);
+        setParticipantName('')
     }
+
     return (
         <View style={styles.container}>
             <Text style={styles.eventName}>Nome do evento</Text>
@@ -31,6 +26,8 @@ export default function Home() {
                     placeholder='Nome do participante'
                     placeholderTextColor="#6B6B6B"
                     keyboardType='default'
+                    onChangeText={setParticipantName}
+                    value={participantName}
                 />
 
                 <TouchableOpacity style={styles.button} onPress={handleParticipantAdd}>
