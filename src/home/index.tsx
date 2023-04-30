@@ -1,11 +1,24 @@
-import { Text, View, StatusBar, TextInput, TouchableOpacity } from 'react-native';
+import { Text, View, StatusBar, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import { styles } from './styles';
 import { Participant } from '../components/Participant';
 export default function Home() {
 
+    const participants = [
+        'Lourenço',
+        'Julio Cezar',
+        'Valdemir',
+        "Pedro Miguel",
+        "Wagninho",
+        'Lourenço',
+        'Julio Cezar',
+        'Valdemir',
+        "Pedro Miguel",
+        "Wagninho",
+    ]
+
     const handleParticipantAdd = () => {
         console.log("clicked!");
-        
+
     }
     return (
         <View style={styles.container}>
@@ -24,10 +37,13 @@ export default function Home() {
                     <Text style={styles.buttonText}>+</Text>
                 </TouchableOpacity>
             </View>
-
-            <Participant name='Pedro' />
-            <Participant name="Julio Cesar" />
-            <Participant name="Lucas" />
+            <ScrollView>
+            {
+                participants.map(participant => (
+                    <Participant name={participant} key={participant}/>
+                ))
+            }
+            </ScrollView>
             <StatusBar />
         </View>
     );
