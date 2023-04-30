@@ -1,4 +1,4 @@
-import { Text, View, StatusBar, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import { Text, View, StatusBar, TextInput, TouchableOpacity, FlatList } from 'react-native';
 import { styles } from './styles';
 import { Participant } from '../components/Participant';
 export default function Home() {
@@ -37,13 +37,13 @@ export default function Home() {
                     <Text style={styles.buttonText}>+</Text>
                 </TouchableOpacity>
             </View>
-            <ScrollView>
-            {
-                participants.map(participant => (
-                    <Participant name={participant} key={participant}/>
-                ))
-            }
-            </ScrollView>
+            <FlatList
+                data={participants}
+                keyExtractor={item => item}
+                renderItem={({ item }) => (<Participant name={item} key={item} />)}
+                ListEmptyComponent={() => <Text style={styles.haveNoParticipantText}>Não há participantes no momento!</Text>}
+            >
+            </FlatList>
             <StatusBar />
         </View>
     );
